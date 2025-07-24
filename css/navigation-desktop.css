@@ -1,14 +1,41 @@
-/* Navigaci při šířce > 1175px */
+/* DESKTOP NAVIGACE 
+    Desktop navigace je zde myšlena jako navigace, která se zobrazí při šířce > 1175px.
+    Navigace zobrazená při šířce ≤ 1175px je v navigation-mobile.css.
+    Od 2000px dochází k jiným mezerám mezi tlačítky v navigaci => viz responsiveness.css.
+*/
 
-/* DOMEČEK */
-.home-icon {
+/*
+OBSAH:
+ 1. Header ul
+    - domeček
+
+ 2. Tlačítka v navigaci, dropdown
+    - obecně
+    - pro elementy "a"
+    - aktivní položky
+*/
+
+
+
+/* ==== 1. HEADER UL ==== */
+header ul {
+    list-style: none;
+    margin-top: 1px;
+    display: flex;
+    justify-content: center;
+    padding: 1px 0;
+    position: relative;
+}
+
+/* Domeček */
+header ul .home-icon {
     display: inline-block;
     position: relative;
     text-decoration: none;
     pointer-events: none; /* Vypne interakci s celým kontejnerem */
 }
 
-.home-icon img {
+header ul .home-icon img {
     width: 25px;
     height: auto;
     margin-left: 10px;
@@ -16,17 +43,22 @@
     pointer-events: auto; /* Zapne interakci pouze pro obrázek */
 }
 
-.home-icon:hover img {
-    filter: brightness(0) saturate(100%) invert(38%) sepia(79%) saturate(2126%) hue-rotate(174deg) brightness(105%) contrast(91%); /*Odpovídá přibližně barvě #309ce5 */
+/* Pro změnu barvy domečku při hoveru (barva souboru je bílá) */
+header ul .home-icon:hover img {
+    filter: brightness(0) saturate(100%) invert(38%) sepia(79%) saturate(2126%) hue-rotate(174deg) brightness(105%) contrast(91%); /* Odpovídá přibližně barvě #309ce5 */
 }
 
-/* TLAČÍTKA V NAVIGACI, DROPDOWN */
+
+
+/* ==== 2. TLAČÍTKA V NAVIGACI, DROPDOWN ==== */
+
+/* --- Obecně --- */
 .button-container {
     display: flex;
     align-items: center;
-    margin-right: 1.43vmax;
-    margin-left: 1.43vmax;
-    white-space: nowrap; /* Text se v tlačítkách nebude zalamovat při změnšení okna*/
+    margin-right: 1.43vw;
+    margin-left: 1.43vw;
+    white-space: nowrap; /* Text se v tlačítkách nebude zalamovat */
 }
 
 .arrow {
@@ -37,11 +69,12 @@
 .dropdown {
     position: relative;
     display: inline-block;
+    text-decoration: none;
     margin: 0;
 }
 
 .main-button,
-.maine-button,
+.main-button-second,
 .dropdown-toggle,
 .dropdown-toggle-second {
     background-color: #f0f9f0;
@@ -64,12 +97,11 @@
     height: 19px;
 }
 
-.maine-button {
+.main-button-second {
     border-top-right-radius: 20px; 
     border-bottom-right-radius: 20px;
     height: 19px;
 }
-
 
 .dropdown-toggle,
 .dropdown-toggle-second {
@@ -102,9 +134,8 @@
     border-top-right-radius: 5px; 
 }
 
-
 .main-button:hover,
-.maine-button:hover,
+.main-button-second:hover,
 .dropdown-toggle:hover,
 .dropdown-toggle-second:hover {
     background-color: #309ce5;
@@ -144,13 +175,13 @@
     background-color: #f0f9f0;
     box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
     border-radius: 5px;
-    display: block; /* Zde použít block místo none */
+    display: block;
     text-align: center; 
     padding: 5px;
     z-index: 1000;
     width: 150px;
     margin-top: 3px;
-    font-size: medium;
+    font-size: 16px; /* Pro zachování stejného písma při různých nastavení prohlížeče => navigace je centrovaná */
 }
 
 .dropdown-content.show,
@@ -159,9 +190,7 @@
     opacity: 1;
     visibility: visible;
     transition: opacity 0.3s ease-in-out, visibility 0s; /* Bez zpoždění pro visibility */
-
 }
-
 
 .dropdown-content {
     left: 50%; /* V polovině tlačítka*/
@@ -183,8 +212,8 @@
     padding: 5px;
     min-width: 150px;
     margin-left: 4.5%;
-    opacity: 0; /* Začíná jako průhledné */
-    visibility: hidden; /* Skryté */
+    opacity: 0;
+    visibility: hidden;
     transition: opacity 0.3s ease, visibility 0s 0.3s; /* Plynulý přechod pro opacity, a zpožděný přechod pro visibility */
     z-index: 1000;
 }
@@ -195,7 +224,8 @@
     transition: opacity 0.3s ease, visibility 0s 0s; /* Bez zpoždění pro visibility při zobrazení */
 }
 
-/* PRO KONKRÉTNÍ PRVKY */
+
+/* --- Pro elementy "a" --- */
 .dropdown-content a,
 .dropdown-content-second a {
     padding: 10px;
@@ -228,9 +258,10 @@
     cursor: pointer;
 }
 
-/* ==AKTIVNÍ POLOŽKY== */
+
+/* --- Aktivní položky --- */
 .main-button.active,
-.maine-button.active,
+.main-button-second.active,
 .dropdown-content a.active,
 .dropdown-content-second a.active {
     background-color: #1c77e8;
@@ -242,20 +273,3 @@
 .dropdown-content-second a.active:hover {
     background-color: #388E3C;
 }
-
-/* Pro zrychlení zobrazování dropdown menu */
-/*.dropdown-content, 
-.dropdown-content-second, 
-.sub-dropdown-content {
-    transform: translateZ(0); 
-    backface-visibility: hidden; 
-}*/
-
-/* Optimalizace pro obrazky v menu */
-/*
-.home-icon {
-    content-visibility: auto; 
-}*/
-
-
- 
